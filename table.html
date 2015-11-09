@@ -1,0 +1,78 @@
+<!doctype html>
+<html data-ng-app="customerApp">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<style>
+		.page-header{
+			text-align:center;
+		}
+		.form-inline{
+			margin-bottom:10px;
+			text-align:center;
+		}
+		.container{
+			width:80%;
+		}
+		input {
+			width:10%;
+		}
+		th {
+			background-color:black;
+			color:white;
+		}
+	</style>
+</head>
+<body data-ng-controller="customerController">
+    <div class="container">
+	    <div class="page-header">
+			<h3> Список заказов</h3>
+		</div>
+        <div class="form-inline">
+			<input type="number"  placeholder="Номер заказа" data-ng-model="order.number" required min="1" max="5000"/>
+			<input type="data"  placeholder="Дата заказа" data-ng-model="order.dataOrder" required  data-ng-pattern="/\d\d.\d\d.\d\d\d\d/"/>
+            <input placeholder = "Название" required data-ng-model="order.customer"/>
+			<input type="email"  placeholder="Email" required data-ng-model="order.email"/>
+			<input type="number"  placeholder="Summa" required data-ng-model="order.summa" min="100" step="100"/>
+            <button class="btn btn-success" data-ng-click="addItem(order,customerController)">Добавить</button>
+        </div>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+					<th>#</th>
+					<th>Дата заказа</th>
+					<th>Заказчик</th>
+					<th>Emai</th>
+					<th>Сумма заказа</th>
+					<th>Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="item in list.items" data-ng-class="$odd ? 'success' : 'info'">
+					<td>{{item.number}}</td>
+					<td>{{item.dataOrder}}</td>
+                    <td>{{item.customer}}</td>
+					<td>{{item.email}}</td>
+                    <td>{{item.summa}}</td>
+                    <td><input type="button"  class="btn btn-warning"   value="{{'Удалить'}}" data-ng-click="removeItem(item.number,item.dataOrder,item.customer)" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+ 
+<script src="js/lib/angular.min.js"></script>
+<script>
+var model = {
+			items: [
+					{ number:"1", dataOrder:"09.11.2015", customer: "ОАО Леспромбум", email:'email@email.ru', summa: 2000},
+					{ number:"2", dataOrder:"09.11.2015", customer: "ГУО Торсплавмед", email:'email@email.ru', summa: 3500},
+					{ number:"3", dataOrder:"09.11.2015", customer: "ООО Рога и копыта", email:'email@email.ru', summa: 4000},
+					{ number:"4", dataOrder:"09.11.2015", customer: "ОАО Какой-то заказчик", email:'email@email.ru', summa:5000}
+				]
+};
+
+angular.module("customerApp", []);
+</script>
+<script src="js/controllers/customerapp.js"></script>
+</body>
+</html>
