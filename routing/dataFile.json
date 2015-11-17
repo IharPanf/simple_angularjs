@@ -1,0 +1,22 @@
+[
+   {
+    "name": "MongoDB",
+    "official_site": "https://www.mongodb.org/",
+    "shortText": "MongoDB allows Foursquare to seamlessly process and store all user check-ins, with hundreds of thousands of input/output operations per second."
+  },
+    {
+    "name": "Express",
+    "official_site": "http://expressjs.com/",
+    "shortText": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications."
+  },
+  {
+    "name": "AngularJS",
+    "official_site": "https://angularjs.org/",
+    "shortText": "HTML is great for declaring static documents, but it falters when we try to use it for declaring dynamic views in web-applications. AngularJS lets you extend HTML vocabulary for your application. The resulting environment is extraordinarily expressive, readable, and quick to develop."
+  },
+  {
+    "name": "Node.js",
+    "official_site": "https://nodejs.org/",
+    "shortText": "As an asynchronous event driven framework, Node.js is designed to build scalable network applications. In the following 'hello world' example, many connections can be handled concurrently. Upon each connection the callback is fired, but if there is no work to be done Node is sleeping."
+  }
+]

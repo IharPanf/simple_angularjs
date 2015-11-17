@@ -1,0 +1,83 @@
+<html ng-app="techApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Example routing AngularJS </title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/lib/angular.min.js"></script>
+	<script src="js/lib/angularRoute.min.js"></script>
+	<style>
+		li{
+			float:left;		
+			margin-right:10px;
+			border:1px solid #e4edf4;
+			background:#e4edf4;
+			padding:4px 8px 4px 8px;
+			list-style-type: none;
+			cursor:pointer;
+		}
+		li  a{
+			color:#3E6D20;
+			text-decoration: none !important;			
+		}
+		li:hover{
+			background:#BAE6EF;
+		}
+		.container {
+			margin-top:5%;
+		}
+		.row-fluid{
+			margin-bottom:10px;
+		}
+		.row-fluid:last-child {
+			margin-top:3%;
+		}
+		blockquote {
+			cursor:pointer;
+		}
+		blockquote:hover {
+			border-color:green;
+		}
+		.btnNext {
+			float:right;
+			margin-top:-40px;
+		}
+	</style>
+    <script>
+      var techApp = angular.module('techApp', ['ngRoute']);
+
+      techApp.config(function($routeProvider) {
+        $routeProvider.
+          when('/', {
+            templateUrl: 'technologyList.html',
+            controller: 'TechBrowseCtrl'
+          }).
+          when('/:techName', {
+            templateUrl: 'technologyDetail.html',
+            controller: 'TechDetailCtrl'
+          }).
+          otherwise({
+            redirectTo: '/'
+          });
+      });
+
+ 
+      techApp.controller('TechBrowseCtrl', function ($scope, $http){
+        $http.get('dataFile.json').success(function(data) {
+          $scope.technologies = data;
+        });
+      });
+	  
+      techApp.controller('TechDetailCtrl', function ($scope, $routeParams, $http){
+        $scope.name = $routeParams.techName;
+        $http.get('dataFile.json').success(function(data) {
+          $scope.technology = data.filter(function(entry){
+            return entry.name === $scope.name;
+          })[0];
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div ng-view></div>
+  </body>
+</html>
