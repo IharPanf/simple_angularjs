@@ -1,0 +1,105 @@
+<!doctype html>
+<html data-ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.css">
+	<style>
+		.radio {
+			display:inline-block;
+			margin-left:20px;
+			cursor:pointer;
+		}
+		.sort {
+			border-bottom:1px solid grey;
+			padding: 10px 10px 10px 0;
+		}
+		.container{
+			margin-top:5%;
+		}
+		.main {
+			padding:2%;
+		}
+	</style>
+</head>
+<body>
+<div class = "container" data-ng-controller="someController">
+	<div class="row-fluid sort">
+		<label class="radio" data-ng-repeat="button in switchValue">
+				<input type="radio" data-ng-model="data.mode" value="{{button.value}}" name="switchValue" />
+				{{button.label}}
+		</label>
+	</div>
+	<div class="row-fluid main">
+		<div data-ng-switch on="data.mode">
+			<div data-ng-switch-when="Frontend">
+				<ul>
+					<li data-ng-repeat="item in front">
+						<abbr title="{{item.name}}">{{item.name}}</abbr>
+					</li>
+				</ul>
+			</div>
+			<div data-ng-switch-when="Backend">
+				<ul>
+					<li data-ng-repeat="item in back">
+						<abbr title="{{item.name}}">{{item.name}}</abbr>
+					</li>
+				</ul>
+			</div>
+			<div data-ng-switch-when="QA">
+				<ul>
+					<li data-ng-repeat="item in qa">
+						<abbr title="{{item.name}}">{{item.name}}</abbr>
+					</li>
+				</ul>
+			</div>
+			<div data-ng-switch-when="JAVA">
+				<ul>
+					<li data-ng-repeat="item in java">
+						<abbr title="{{item.name}}">{{item.name}}</abbr>
+					</li>
+				</ul>
+			</div>
+			<div data-ng-switch-default>
+				Пример использования директивы <b>data-ng-switch</b>  в AngularJS. Выберите направление для просмотра (<small><i>данные несут только "тестовый" смысл.</i></small>)
+			</div>
+		</div>
+	</div>
+</div>
+<script src="js/lib/angular.min.js"></script>
+<script type="text/javascript">
+var myApp = angular.module('myApp', []);
+myApp.controller('someController', function($scope) {
+
+	$scope.switchValue = [{ value: 'Frontend', label: 'Фронтенд'},
+						  { value: 'Backend', label: 'Бэкенд'},
+					      { value: 'QA', label: 'Тестирование'},
+					      { value: 'JAVA', label: 'Java'}
+					    ];
+	$scope.data = {};						
+	$scope.back = [ { name: 'PHP 5.5+'},
+				    { name: 'Zend Framework 2'},
+				    { name: 'Symfony 2'}
+				 ];
+	
+	$scope.front = [{ name: 'JavaScript'},
+				    { name: 'HTML5'},
+				    { name: 'CSS'},
+				    { name: 'Bootsrap'}
+				 ];	
+				
+	$scope.qa =  [{ name: 'Virtual Box'},
+				  { name: 'Firebug'},
+				  { name: 'Virtual Box'},
+				  { name: 'bugtracking '}
+				];
+	$scope.java =  [{ name: 'Hadoop'},
+				    { name: 'BigData'},
+				    { name: 'MultiThreading'},
+				    { name: 'Java EE '},
+				    { name: 'Spring '},
+				    { name: 'hibernate '}
+				];			
+});
+</script>
+</body>
+</html>
