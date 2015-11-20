@@ -1,0 +1,170 @@
+<!doctype html>
+<html data-ng-app = "questApp">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<style>
+		.btnCheck {
+			float:right;
+			margin-top:-60px;
+		}
+		.btnCheck:last-child {
+			margin-top:0px;
+		}
+		.container{
+			margin-top:5%;
+			box-shadow:0 0 10px rgba(0,0,0,0.5);
+			padding:2%;
+		}
+		.radio li{
+			margin-left:5%;
+		}
+		.radio {
+			margin-top:20px;
+		}
+		.well{
+			font-size:120%;
+		}
+		.row-fluid:first-child {
+			text-align:center;
+		}
+	</style>
+</head>
+<body>
+<div class="container" data-ng-controller="questController">
+	<div class="row-fluid">
+		<h3>Небольшой тест по директивам AngularJS</h3>
+		<div class="btnCheck">
+			 <button class="btn btn-large btn-primary" type="button" data-ng-click="check();">Проверить</button>
+		</div>
+	</div>	
+	<div class="row-fluid">
+			<div class="radio" data-ng-repeat="answer in quiz">
+				<div class="well">
+					{{answer.quizText}}
+				</div>
+				<li data-ng-repeat="curAns in answer.ans">
+					<input type="radio"  value="{{curAns.value}}" name="{{answer.groupQuiz}}" class="answer"  checked/>
+					{{curAns.label}}
+				</li>
+			</div>
+	</div>
+	<div class="row-fluid">
+		<div class="btnCheck">
+			 <button class="btn btn-large btn-primary" type="button" data-ng-click="check();">Проверить</button>
+		</div>
+	</div>
+</div>
+<script src="js/lib/angular.min.js"></script>
+<script>
+	var questApp = angular.module('questApp', []);
+	questApp.controller('questController', function($scope){
+		$scope.data = {};
+		$scope.check = function(){
+			var elem = angular.element(document.querySelectorAll(".answer"));
+			var arrAnswer = [];
+			var countCorrect = 0;
+			for (var i = 0; i < elem.length; i++) {
+				if (elem[i].checked) {
+					arrAnswer.push(elem[i].value);
+				}
+			}
+		
+			for (var i =0; i < $scope.quiz.length; i++ ) {
+				if (atob($scope.quiz[i].correct) == arrAnswer[i]) {
+					countCorrect++;
+				}
+			}
+			alert('Правильно '+ countCorrect + ' из'+$scope.quiz.length);
+		}
+/*		$scope.random = function(){
+			return 0.5 - Math.random();
+		};		
+*/		
+		$scope.quiz = [{groupQuiz : "f1",
+						quizText  : 'Эта директива копирует элемент и воспроизводит его, заполняя при этом данными объектов из массива. Если из массива удалить элемент, DOM обновится автоматически.',
+						ans  	  : [{ value: 'ngRepeat', label: 'ngRepeat'},
+									 { value: 'ngClone', label: 'ngClone'},
+									 { value: 'ngCopy', label: 'ngCopy'}
+									],
+						correct    :	'bmdSZXBlYXQ='			
+					   },
+					   {groupQuiz : "f2",
+						quizText  : 'Эта директива используется для инициализации новой несуществующей модели, или для привязки существующей.',
+						ans  	  : [{ value: 'ngApp', label: 'ngApp'},
+									 { value: 'ngModel', label: 'ngModel'},
+									 { value: 'ngController', label: 'ngController'}
+									],
+						correct    :	'bmdNb2RlbA=='											
+					   },
+					   {groupQuiz : "f3",
+						quizText  : 'Эта директива не просто прячет элементы, а удаляет их. Если элемент нужно воссоздать после изменения значения свойства, для него создаётся новый $scope. Это также положительно влияет на быстродействие фреймворка.',
+						ans  	  : [{ value: 'ngIf', label: 'ngIf'},
+									 { value: 'ngHide', label: 'ngHide'},
+									 { value: 'ngRemove', label: 'ngRemove'}
+									],
+						correct    :	'bmdJZg=='							
+					   },
+					   	{groupQuiz : "f4",
+						quizText  : 'Директива, сходная с оператором case / switch в программировании, или продвинутый ngIf. В зависимости от значения из $scope выбирается один из нескольких элементов.',
+						ans  	  : [{ value: 'ngCase', label: 'ngCase'},
+									 { value: 'ngElseIf', label: 'ngElseIf'},
+									 { value: 'ngSwitch', label: 'ngSwitch'}
+									],
+						correct    :	'bmdTd2l0Y2g='							
+					   },
+					   {groupQuiz : "f5",
+						quizText  : 'Эту директиву можно использовать, чтобы избежать мигания при загрузке страницы. Angular автоматически скрывает контент, который подгружается через директивы. При использовании фигурных скобок они могут быть видны в тексте документа. При использовании этой директивы вставки не видны, пока Angular не вычислит нужные значения.',
+						ans  	  : [{ value: 'ngModel', label: 'ngModel'},
+									 { value: 'ngBind', label: 'ngBind'},
+									 { value: 'ngShow', label: 'ngShow'}
+									],
+						correct    :	'bmdCaW5k'					
+					   },
+					   {groupQuiz : "f6",
+						quizText  : 'Одностраничные приложения используют одну страницу без перезагрузок, содержимое которой обновляется автоматически. Это достигается использованием этой директивы с пустым элементом вроде <div></div>, который служит контейнером для любого динамически вставляемого кода.',
+						ans  	  : [{ value: 'ngView', label: 'ngView'},
+									 { value: 'ngModel', label: 'ngModel'},
+									 { value: 'ngController', label: 'ngController'}
+									],
+						correct    :	'bmdWaWV3'							
+					   },
+					   	{groupQuiz : "f7",
+						quizText  : 'Эта директива выглядит как описание свойств и значений объекта. Вместо традиционных вызовов elem.addClass(className) и elem.removeClass(className), Angular добавляет и удаляет классы на основании заданных выражений.',
+						ans  	  : [{ value: 'ngAddClass', label: 'ngAddClass'},
+									 { value: 'ngProperty', label: 'ngProperty'},
+									 { value: 'ngClass', label: 'ngClass'}
+									],
+						correct    :	'bmdDbGFzcw=='						
+					   },
+					   	{groupQuiz : "f8",
+						quizText  : 'Эти директива часто встречаются при использовании Angular. Это удобный способ прятать данные в зависимости от значения свойства.',
+						ans  	  : [{ value: 'ngHide', label: 'ngHide'},
+									 { value: 'ngShow', label: 'ngShow'},
+									 { value: 'ngIf', label: 'ngIf'}
+									],
+						correct    :	'bmdIaWRl'						
+					   },
+					    {groupQuiz : "f9",
+						quizText  : 'Самая важная директива, которую, если вы хотите использовать Angular, нужно включить во все страницы сайта.',
+						ans  	  : [{ value: 'ngController', label: 'ngController'},
+									 { value: 'ngModel', label: 'ngModel'},
+									 { value: 'ngApp', label: 'ngApp'}
+									],
+						correct    :	'bmdBcHA='							
+					   },
+					    {groupQuiz : "f10",
+						quizText  : 'Эта директива нужна для показа данных $scope.Её(директиву) используют для связывания области видимости и экземпляра Контроллера, и обеспечения доступа к данным и методам Контроллера из DOM.',
+						ans  	  : [{ value: 'ngModel', label: 'ngModel'},
+									 { value: 'ngController', label: 'ngController'},
+									 { value: 'ngView', label: 'ngView'}
+									],
+						correct    :	'bmdDb250cm9sbGVy'						
+					   }
+					];		
+	})
+</script>
+</body>
+</html>
+</body>
+</html>
