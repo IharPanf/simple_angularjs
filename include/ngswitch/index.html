@@ -2,7 +2,7 @@
 <html data-ng-app="myApp">
 <head>
 	<meta charset="utf-8">
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
 	<style>
 		.radio {
 			display:inline-block;
@@ -15,14 +15,31 @@
 		}
 		.container{
 			margin-top:5%;
+			margin-bottom:5%;
+			padding:10px;
+			text-align:center;
+			background:white;
+			box-shadow: 0 0 10px rgba(0,0,0,0.5); 
+		}
+		body {
+			background:#E5E5E5;
 		}
 		.main {
 			padding:2%;
+		}
+		label {
+			margin-right:20px;
+		}
+		li {
+			list-style-type:none;
 		}
 	</style>
 </head>
 <body>
 <div class = "container" data-ng-controller="someController">
+	<div class="row-fluid">
+		<h3> Пример использования директивы <b>data-ng-switch</b>  в AngularJS.</h3>
+	</div>	
 	<div class="row-fluid sort">
 		<label class="radio" data-ng-repeat="button in switchValue">
 				<input type="radio" data-ng-model="data.mode" value="{{button.value}}" name="switchValue" />
@@ -60,12 +77,12 @@
 				</ul>
 			</div>
 			<div data-ng-switch-default>
-				Пример использования директивы <b>data-ng-switch</b>  в AngularJS. Выберите направление для просмотра (<small><i>данные несут только "тестовый" смысл.</i></small>)
+				Выберите направление для просмотра (<small><i>данные несут только "тестовый" смысл.</i></small>)
 			</div>
 		</div>
 	</div>
 </div>
-<script src="js/lib/angular.min.js"></script>
+<script src="../../js/angular.min.js"></script>
 <script type="text/javascript">
 var myApp = angular.module('myApp', []);
 myApp.controller('someController', function($scope) {

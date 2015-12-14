@@ -2,19 +2,16 @@
 <html data-ng-app = "questApp">
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="../../css/bootstrap.css">
 	<style>
 		.btnCheck {
-			float:right;
-			margin-top:-60px;
-		}
-		.btnCheck:last-child {
-			margin-top:0px;
+			text-align:right;
 		}
 		.container{
 			margin-top:5%;
 			box-shadow:0 0 10px rgba(0,0,0,0.5);
 			padding:2%;
+			background:white;
 		}
 		.radio li{
 			margin-left:5%;
@@ -28,6 +25,9 @@
 		.row-fluid:first-child {
 			text-align:center;
 		}
+		body {
+			background:#E5E5E5;
+		}		
 	</style>
 </head>
 <body>
@@ -55,7 +55,7 @@
 		</div>
 	</div>
 </div>
-<script src="js/lib/angular.min.js"></script>
+<script src="../../js/angular.min.js"></script>
 <script>
 	var questApp = angular.module('questApp', []);
 	questApp.controller('questController', function($scope){

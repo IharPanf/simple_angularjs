@@ -2,7 +2,7 @@
 <html data-ng-app = "exampleApp">
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="../../css/bootstrap.css">
 	<style>
 		li span {
 			font-size:120%;
@@ -15,7 +15,8 @@
 			margin-top:5%;
 			margin-bottom:5%;
 			box-shadow: 0 0 10px rgba(0,0,0,0.5);
-			padding:20px;	
+			padding:20px;
+			background:white;			
 		}
 		.row-fluid {
 			border-bottom:1px solid grey;
@@ -29,6 +30,9 @@
 		}
 		h6 {
 			color:navy;
+		}
+		body {
+			background:#E5E5E5;
 		}
 	</style>
 </head>
@@ -95,7 +99,7 @@
 	</div>
 	<p ng-bind="main.name"></p>
 </div>
-<script src="js/lib/angular.min.js"></script>
+<script src="../../js/angular.min.js"></script>
 <script>
 	var exampleApp = angular.module('exampleApp', []);
 	exampleApp.controller('exampleController', function($scope){
